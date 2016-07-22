@@ -17,6 +17,12 @@ function tree(node, tc, layer) {
             var idNode = node;
             var symbol = tc.getTypeAtLocation(idNode).symbol;
             // Debugging
+            if (node.parent.kind === ts.SyntaxKind.PropertyAccessExpression) {
+                var propertyNode = node.parent;
+                if (symbol) {
+                    console.log(symbol.valueDeclaration.parent.getText());
+                }
+            }
             // End debugging
             var symbolName = (symbol) ? symbol.name : "";
             out += " ( " + idNode.text + " , " + tc.typeToString(tc.getTypeAtLocation(idNode)) + " , " + symbolName + " )";

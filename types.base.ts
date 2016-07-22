@@ -18,8 +18,11 @@ function tree(node: ts.Node, tc: ts.TypeChecker, layer: number = 0): void {
       const symbol = tc.getTypeAtLocation(idNode).symbol;
 
 // Debugging
-if (node.kind === ts.SyntaxKind.PropertyAccessExpression) {
-  const propertyNode = node as ts.PropertyAccessExpression;
+if (node.parent.kind === ts.SyntaxKind.PropertyAccessExpression) {
+  const propertyNode = node.parent as ts.PropertyAccessExpression;
+  if (symbol) {
+    console.log(symbol.valueDeclaration.parent.getText());
+  }
 }
 // End debugging
 
